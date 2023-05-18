@@ -1,0 +1,65 @@
+#include <stdio.h>
+#include <time.h>
+#define MAX_COINS 100
+
+int coinChangeGreedy(int coins[], int numCoins, int value, int selectedCoins[]) {
+    int i, count = 0;
+    for(i = 0; i < numCoins; i++) {
+        while(value >= coins[i]) {
+            value -= coins[i];
+            selectedCoins[count++] = coins[i];
+        }
+        if(value == 0)
+            break;
+    }
+    return count;
+}
+
+
+
+int main() {
+    int coins[MAX_COINS], selectedCoins[MAX_COINS];
+    int numCoins, value, t, i, j;
+    printf("Enter the number of coins: ");
+    scanf("%d", &numCoins);
+
+    printf("Enter the value of each coin:\n");
+    for(i = 0; i < numCoins; i++)
+        scanf("%d", &coins[i]);
+
+    for(i = 0; i < numCoins; i++)
+        for(j = 0; j < numCoins - 1; j++)
+            if (coins[j] < coins[j+1]) { 
+                t = coins[j+1];
+                coins[j+1] = coins[j];
+                coins[j] = t;
+            }
+
+    printf("Enter the value to be exchanged: ");
+    scanf("%d", &value);
+
+    clock_t start = clock();
+    int numSelectedCoins = coinChangeGreedy(coins, numCoins, value, selectedCoins);
+    clock_t end = clock();
+    
+    printf("The minimum number of coins required for the value %d is %d.\n", value, numSelectedCoins);
+    printf("The selected coins are: ");
+
+    for(i = 0; i < numSelectedCoins; i++) 
+        printf("%d ", selectedCoins[i]);
+    
+    printf("\n");
+    double time_taken = ((double)(end - start)) / CLOCKS_PER_SEC;
+
+    printf("Time taken: %f seconds.\n", time_taken);
+}
+
+
+*******OUTPUT********
+Enter the number of coins: 6
+Enter the value of each coin:
+20 50 1 2 100 8
+Enter the value to be exchanged: 107
+The minimum number of coins required for the value 107 is 5.
+The selected coins are: 100 2 2 2 1 
+Time taken: 0.000003 seconds.
