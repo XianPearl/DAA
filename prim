@@ -1,0 +1,54 @@
+#include <stdio.h>
+int a,b,u,v,n,i,j,key=1;
+int visited[10] = {0}, min, mincost = 0, cost[10][10];
+
+void main() {
+    printf("\nImplementation of Prim's Algorithm");
+    printf("\nEnter the number of vertices : ");
+    scanf("%d",&n);
+    printf("\nEnter the adjacency matrix: \n");
+    for (i=1;i<=n;i++)
+        for (j=1;j<=n;j++) {
+            scanf("%d", &cost[i][j]);
+            if (cost[i][j]==0)
+                cost[i][j]=999;
+        }
+    visited[1]=1;
+    printf("\n");
+    while (key<n) {
+        for (i=1,min=999;i<=n;i++)
+            for (j=1;j<=n;j++)
+                if (cost[i][j]<min)
+                    if (visited[1]!=0) {
+                        min = cost[i][j];
+                        a=u=i;
+                        b=v=j;
+                    }
+        if (visited[u]==0 || visited[v]==0) {
+            printf("\nEdge %d : (%d <-> %d) cost : %d",key++,a,b,min);
+            mincost+=min;
+            visited[b]=1;
+        }
+        cost[a][b]=cost[b][a]=999;
+    }
+    printf("\nMinimum cost = %d units",mincost);
+}
+
+
+
+********OUTPUT********
+Implementation of Prim's Algorithm
+Enter the number of vertices : 6
+Enter the adjacency matrix: 
+0 3 1 6 0 0
+3 0 5 0 3 0
+1 5 0 5 6 4
+6 0 5 0 0 2
+0 3 6 0 0 6
+0 0 4 2 6 0
+Edge 1 : (1 <-> 3) cost : 1
+Edge 2 : (4 <-> 6) cost : 2
+Edge 3 : (1 <-> 2) cost : 3
+Edge 4 : (2 <-> 5) cost : 3
+Edge 5 : (3 <-> 4) cost : 5
+Minimum cost = 14 units
