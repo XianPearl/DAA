@@ -77,11 +77,11 @@ void printGraph(struct Graph* graph) {
 }
 
 int main() {
-  int n, i, src, dest;
-  printf("Enter no of vertices : ");
-  scanf("%d",&n);
+  int n, m, i, src, dest;
+  printf("Enter no of vertices and edges : ");
+  scanf("%d %d", &n, &m);
   struct Graph* graph = createGraph(n);
-  for (i = 0; i < n; i++) {
+  for (i = 0; i < m; i++) {
       printf("Enter source and destination of edge %d : ",i+1);
       scanf("%d %d", &src, &dest);
       addEdge(graph, src, dest);
@@ -95,7 +95,7 @@ int main() {
 
 
 *****OUTPUT*****
-Enter no of vertices : 4
+Enter no of vertices and edges : 4 4
 Enter source and destination of edge 1 : 0 1
 Enter source and destination of edge 2 : 0 2
 Enter source and destination of edge 3 : 0 3
