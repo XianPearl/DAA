@@ -53,10 +53,8 @@ void main () {
     int A[n];
     random_input (A, n);
     display (A, n);
-    max = A[0];
-    min = A[0];
     start = clock();
-    Max_min (A, 1, n-1);
+    Max_min (A, 0, n-1);
     end = clock();
     h = (double)(end - start)/CLOCKS_PER_SEC;
     printf ("\nMax : %d", max);
@@ -71,7 +69,8 @@ void main () {
 
 ******OUTPUT********
 Array size : 10
-917  31  47  733  221  584  120  807  779  603  
-Max : 807
-Min : 47
-0.000003 sec
+598  972  775  313  730  925  969  173  330  412  
+Max : 972
+Min : 173
+0.000002 sec
+
