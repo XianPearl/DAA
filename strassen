@@ -1,0 +1,132 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <time.h>
+
+void perform (int n, int A[][n], int B[][n], int C[][n], int o) {
+    int i, j;
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < n; j++)
+            if (o == 1)
+                C[i][j] = A[i][j] - B[i][j];
+            else
+                C[i][j] = A[i][j] + B[i][j];
+}
+
+void print (int n, int nreal, int m[][nreal]) {
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++)
+            printf("%d  ", m[i][j]);
+        printf("\n");
+    }
+}
+
+void enter (int n, int nreal, int a[][nreal]) {
+    for (int i = 0; i < nreal; i++)
+        for (int j = 0; j < nreal; j++)
+            if (i < n && j < n)
+                a[i][j] = rand() % n;
+            else
+                a[i][j] = 0;
+}
+
+void strassen (int n, int A[][n], int B [][n], int C[][n]) {
+    if (n == 1) {
+        C[0][0] = A[0][0] * B[0][0];
+        return;
+    }
+    int nn = n/2;
+    int a11[nn][nn], a12[nn][nn], a21[nn][nn], a22[nn][nn], b11[nn][nn], b12[nn][nn], b21[nn][nn], b22[nn][nn], c11[nn][nn], c12[nn][nn], c21[nn][nn], c22[nn][nn];
+    
+    for (int i = 0; i < nn; i++)
+        for (int j = 0; j < nn; j++) {
+            a11[i][j] = A[i][j];
+            b11[i][j] = B[i][j];
+            a12[i][j] = A[i][j+nn];
+            b12[i][j] = B[i][j+nn];
+            a21[i][j] = A[i+nn][j];
+            b21[i][j] = B[i+nn][j];
+            a22[i][j] = A[i+nn][j+nn];
+            b22[i][j] = B[i+nn][j+nn];
+        }
+    
+    int s1[nn][nn], s2[nn][nn], s3[nn][nn], s4[nn][nn], s5[nn][nn], s6[nn][nn],  s7[nn][nn], s8[nn][nn], s9[nn][nn], s10[nn][nn], p1[nn][nn], p2[nn][nn], p3[nn][nn], p4[nn][nn], p5[nn][nn], p6[nn][nn], p7[nn][nn];
+    
+    perform (nn, b12, b22, s1, 1);
+    perform (nn, a11, a12, s2, 0);
+    perform (nn, a21, a22, s3, 0);
+    perform (nn, b21, b11, s4, 1);
+    perform (nn, a11, a22, s5, 0);
+    perform (nn, b11, b22, s6, 0);
+    perform (nn, a12, a22, s7, 1);
+    perform (nn, b21, b22, s8, 0);
+    perform (nn, a11, a21, s9, 1);
+    perform (nn, b11, b12, s10, 0);
+    
+    strassen (nn, a11, s1, p1);
+    strassen (nn, s2, b22, p2);
+    strassen (nn, s3, b11, p3);
+    strassen (nn, a22, s4, p4);
+    strassen (nn, s5, s6, p5);
+    strassen (nn, s7, s8, p6);
+    strassen (nn, s9, s10, p7);
+    
+    perform (nn, p5, p4, c11, 0);
+    perform (nn, c11, p2, c11, 1);
+    perform (nn, c11, p6, c11, 0);
+    perform (nn, p1, p2, c12, 0);
+    perform (nn, p3, p4, c21, 0);
+    perform (nn, p5, p1, c22, 0);
+    perform (nn, c22, p3, c22, 1);
+    perform (nn, c22, p7, c22, 1);
+    
+    for (int i = 0; i < nn; i++) 
+        for (int j = 0; j < nn; j++) {
+            C[i][j] = c11[i][j];
+            C[i][j+nn] = c12[i][j];
+            C[i+nn][j] = c21[i][j];
+            C[i+nn][j+nn] = c22[i][j];
+        }
+}
+
+void main () {
+    srand(time(NULL));
+    int n;
+    printf("Enter the order of the matrices : ");
+    scanf("%d", &n);
+    int nreal = pow(2, ceil(log2(n)));
+    int A[nreal][nreal], B[nreal][nreal], C[nreal][nreal];
+    enter (n, nreal, A);
+    enter (n, nreal, B);
+    for (int i = 0; i < nreal; i++)
+        for (int j = 0; j < nreal; j++) 
+            C[i][j] = 0;
+    printf("Matrices A with random elements\n");
+    print(n, nreal, A);
+    printf("Matrices B with random elements\n");
+    print(n, nreal, B);
+    printf("Product of matrix A & B : \n");
+    clock_t t1 = clock();
+    strassen (nreal, A, B, C);
+    clock_t t2 = clock();
+    print(n, nreal, C);
+    printf("Time taken : %f sec", (1.0 * t2 - t1)/CLOCKS_PER_SEC);
+}
+
+
+
+
+
+
+*******OUTPUT*********
+Enter the order of the matrices : 2
+Matrices A with random elements
+0  0  
+1  0  
+Matrices B with random elements
+0  0  
+1  0  
+Product of matrix A & B : 
+0  0  
+0  0  
+Time taken : 0.000007 sec
