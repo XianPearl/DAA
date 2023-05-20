@@ -1,0 +1,77 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int max, min;
+
+void random_input (int A[], int n) {
+    srand(time(0));
+    for (int i = 0; i < n; i++)
+        A[i] = rand() % 1000;
+}
+
+void display (int A[], int n){
+    for (int i = 0; i < n; i++)
+        printf("%d  ", A[i]);
+}
+
+void Max_min (int A[], int i, int j) {
+    int max1, min1, mid;
+    if (i == j)
+        max = min = A[i];
+    else {
+        if (i == j-1) {
+            if (A[i] < A[j]) {
+                max = A[j];
+                min = A[j];
+            }
+            else {
+                max = A[i];
+                min = A[j];
+            }
+        }
+        else {
+            mid = (i+j)/2;
+            Max_min (A, i, mid);
+            max1 = max;
+            min1 = min;
+            Max_min (A,mid+1, j);
+            if (max < max1)
+                max = max1;
+            if (min > min1)
+                min = min1;
+        }
+    }
+}
+
+void main () {
+    int i, n ;
+    clock_t start, end;
+    double h;
+    printf("Array size : ");
+    scanf("%d", &n);
+    int A[n];
+    random_input (A, n);
+    display (A, n);
+    max = A[0];
+    min = A[0];
+    start = clock();
+    Max_min (A, 1, n-1);
+    end = clock();
+    h = (double)(end - start)/CLOCKS_PER_SEC;
+    printf ("\nMax : %d", max);
+    printf ("\nMin : %d", min);
+    printf("\n%f sec\n",h);
+}
+
+
+
+
+
+
+******OUTPUT********
+Array size : 10
+917  31  47  733  221  584  120  807  779  603  
+Max : 807
+Min : 47
+0.000003 sec
