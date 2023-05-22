@@ -52,3 +52,47 @@ Edge 3 : (1 <-> 2) cost : 3
 Edge 4 : (2 <-> 5) cost : 3
 Edge 5 : (3 <-> 4) cost : 5
 Minimum cost = 14 units
+
+
+*******ALGORITHM*****
+Prim(graph)
+    1. Create an empty set to store the minimum spanning tree: MST.
+    2. Create a priority queue to store the vertices and their respective key values.
+    3. Initialize the key values of all vertices to positive infinity, except for the first vertex which is set to 0.
+    4. Initialize the parent values of all vertices to null.
+    5. Insert the first vertex into the priority queue with a key value of 0.
+    
+    6. While the priority queue is not empty:
+        7. Extract the vertex with the minimum key value from the priority queue: currentVertex.
+        8. Add currentVertex to the MST.
+        
+        9. For each neighborVertex of currentVertex:
+            10. If neighborVertex is in the priority queue and the weight of the edge (currentVertex, neighborVertex) is less than its key value:
+                11. Update the key value of neighborVertex to the weight of the edge (currentVertex, neighborVertex).
+                12. Update the parent of neighborVertex to currentVertex.
+    
+    13. Return the MST.
+
+
+*****COMPLEXITY******
+The time complexity of Prim's algorithm using a greedy approach depends on the data structure used for selecting the vertex with the minimum key value.
+
+Let's denote V as the number of vertices and E as the number of edges in the graph.
+
+1.  Initialization:
+Initializing the key values and parent values of all vertices takes O(V) time.
+
+2.  Selecting the minimum key vertex:
+In each iteration, the algorithm selects the vertex with the minimum key value from the remaining vertices. If a priority queue based on a binary heap or a 
+Fibonacci heap is used, the extraction operation takes O(log V) time. If a simple array-based implementation is used, finding the minimum key vertex takes O(V) 
+time.
+
+3.  Updating key values and parents:
+For each neighboring vertex of the current vertex, the algorithm checks if the weight of the connecting edge is smaller than the current key value. If so, it 
+updates the key value and parent of the neighboring vertex. This step is performed for a maximum of E edges.
+
+4.  Total time complexity:
+(i) When using a binary heap or Fibonacci heap: The overall time complexity of Prim's algorithm using a greedy approach with a binary heap or Fibonacci heap is 
+O((V + E) log V). This is because selecting the minimum key vertex takes O(log V) time in each iteration, and there can be a maximum of V iterations.
+(ii) When using a simple array-based implementation: The overall time complexity is O(V^2) since finding the minimum key vertex takes O(V) time in each iteration, 
+and there can be a maximum of V iterations.
