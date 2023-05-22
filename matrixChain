@@ -42,3 +42,47 @@ Enter the number of matrices : 4
 Enter the dimensions of the matrices : 
 1 2 3 4 3
 Minimum number of scalar multiplications needed : 30
+
+
+
+*******ALGORITHM******
+MATRIX-CHAIN-ORDER (p)
+ 1. n   length[p]-1
+ 2. for i ← 1 to n
+ 3. do m [i, i] ← 0
+ 4. for l ← 2 to n    // l is the chain length
+ 5. do for i ← 1 to n-l + 1
+ 6. do j ← i+ l -1
+ 7. m[i,j] ←  ∞
+ 8. for k  ← i to j-1
+ 9. do q  ← m [i, k] + m [k + 1, j] + pi-1 pk pj	
+ 10. If q < m [i,j]
+ 11. then m [i,j] ← q
+ 12. s [i,j] ← k
+ 13. return m and s.  
+ 
+ 
+******COMPLEXITY******
+The time complexity analysis of the MCM problem using dynamic programming can be done as follows:
+
+1.  Creating the memoization table: The first step in solving the MCM problem using dynamic programming is to create a memoization table, often referred to as 'dp' 
+table. The table is typically a 2D array of size n x n, where dp[i][j] represents the minimum number of scalar multiplications needed to multiply matrices from i 
+to j (inclusive). Creating this table requires filling n x n cells, so the time complexity is O(n^2).
+
+2.  Filling the memoization table: To fill the memoization table, we iterate over the chain length, which represents the number of matrices to be multiplied at 
+once. For each chain length, we iterate over the possible starting points of the chain and compute the minimum number of scalar multiplications for that chain 
+length and starting point. This involves iterating over the possible split points within the chain and using the previously computed values from the memoization 
+table. The number of iterations for each chain length is n minus the chain length itself. Therefore, the overall time complexity for filling the memoization table 
+is:
+T(n) = 1 + 2 + 3 + ... + (n-1)
+= (n-1)(n)/2
+= O(n^2)
+
+3.  Constructing the optimal solution: Once the memoization table is filled, we can construct the optimal solution by backtracking through the table. This involves
+finding the split point that gives the minimum number of scalar multiplications for each chain length and starting point. The backtracking process has a time 
+complexity of O(n).
+
+Overall, the time complexity of the MCM problem using dynamic programming is dominated by the time required to fill the memoization table, which is O(n^2). The 
+additional steps of creating the table and constructing the optimal solution have a linear time complexity of O(n).
+
+Therefore, the total time complexity of the MCM problem using dynamic programming is O(n^2). 
