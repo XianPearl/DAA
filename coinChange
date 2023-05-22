@@ -63,3 +63,22 @@ Enter the value to be exchanged: 107
 The minimum number of coins required for the value 107 is 5.
 The selected coins are: 100 2 2 2 1 
 Time taken: 0.000003 seconds.
+
+
+******ALGORITHM******
+1. Get coin array and a value.
+2. Make sure that the array is sorted.
+3. Take coin[i] as much we can.
+4. Increment the count.
+5. If solution found,
+    break it.
+6. Otherwise,
+     follow step 3 with the next coin. coin[i+1].
+4. Finally, print the count.
+
+
+
+*******COMPLEXITY**********
+In terms of time complexity, the greedy algorithm typically has a linear time complexity of O(N), where N is the number of coins.
+The sorting step dominates the time complexity, while the subsequent iteration and coin selection steps can be performed in constant time.
+To summarize, the time complexity of the greedy algorithm for the coin change problem is generally O(N), but it may not always provide an optimal solution.
