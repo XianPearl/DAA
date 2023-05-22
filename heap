@@ -63,3 +63,55 @@ Enter the size of array : 10
 After sorting the array elements are : 
 1  2  3  3  5  5  6  6  7  9  
 Time taken in secs : 0.000005 secs
+
+
+
+
+********ALGORITHM*******
+1. HeapSort(arr)  
+BuildMaxHeap(arr)  
+for i = length(arr) to 2  
+    swap arr[1] with arr[i]  
+        heap_size[arr] = heap_size[arr] ? 1  
+        MaxHeapify(arr,1)  
+End  
+
+2. BuildMaxHeap(arr)  
+    heap_size(arr) = length(arr)  
+    for i = length(arr)/2 to 1  
+MaxHeapify(arr,i)  
+End  
+
+3. MaxHeapify(arr,i)  
+L = left(i)  
+R = right(i)  
+if L ? heap_size[arr] and arr[L] > arr[i]  
+largest = L  
+else  
+largest = i  
+if R ? heap_size[arr] and arr[R] > arr[largest]  
+largest = R  
+if largest != i  
+swap arr[i] with arr[largest]  
+MaxHeapify(arr,largest)  
+End   
+
+
+*******COMPLEXITY********
+The time complexity of Heap Sort is O(N log N), where N represents the number of elements in the array being sorted.
+
+The time complexity of Heap Sort can be analyzed as follows:
+1.  Building the heap:
+Building a heap from an unsorted array takes O(N) time complexity. This step involves calling the MaxHeapify procedure on each non-leaf node, starting from the 
+last non-leaf node up to the root. Since there are N/2 non-leaf nodes in a heap, the time complexity of building the heap is O(N/2) = O(N).
+
+2.  Sorting the array:
+The sorting step of Heap Sort involves repeatedly extracting the maximum element from the heap and placing it at the end of the array. This step is performed N 
+times since there are N elements in the array.
+(i) Extracting the maximum element from the heap takes O(1) time complexity.
+(ii) Heapifying the remaining elements after each extraction takes O(log N) time complexity, as it involves restoring the heap property by comparing the element at 
+a given index with its left and right child nodes.
+Therefore, the time complexity of the sorting step is N * O(log N) = O(N log N).
+
+Overall, the time complexity of Heap Sort is dominated by the sorting step, resulting in a time complexity of O(N log N). The time complexity of building the heap 
+contributes O(N) to the overall time complexity, but it is typically overshadowed by the sorting step.
