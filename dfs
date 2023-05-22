@@ -115,3 +115,38 @@ Visited 3
 Visited 1 
 Visited 0 
 Visited 2 
+
+
+*********ALGORITHM**********
+DFS(G,v)   ( v is the vertex where the search starts )    
+        Stack S := {};   ( start with an empty stack )    
+        for each vertex u, set visited[u] := false;    
+        push S, v;    
+        while (S is not empty) do    
+           u := pop S;    
+           if (not visited[u]) then    
+              visited[u] := true;    
+              for each unvisited neighbour w of uu    
+                 push S, w;    
+           end if    
+        end while    
+     END DFS()    
+
+
+
+
+*********COMPLEXITY*******
+The time complexity of Depth-First Search (DFS) depends on the number of vertices (V) and edges (E) in the graph being traversed. 
+DFS explores the graph in a depthward motion, visiting vertices as far as possible along each branch before backtracking.
+In the worst case, DFS can visit all vertices and edges of the graph, ensuring that each vertex is visited exactly once. The time complexity can be analyzed as 
+follows:
+
+1.  Visiting a vertex:
+For each vertex visited, there is a constant amount of work to be done, such as printing or performing any other desired operation. Therefore, visiting a vertex 
+takes constant time, i.e., O(1).
+
+2.  Exploring adjacent vertices:
+For each vertex, DFS explores its adjacent vertices recursively. In the worst case, each vertex can have at most E edges. Therefore, the time complexity of 
+exploring adjacent vertices for a single vertex is O(E).
+
+Overall, the time complexity of DFS is O(V + E).
