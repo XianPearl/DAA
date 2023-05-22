@@ -50,7 +50,8 @@ void strassen (int n, int A[][n], int B [][n], int C[][n]) {
             b22[i][j] = B[i+nn][j+nn];
         }
     
-    int s1[nn][nn], s2[nn][nn], s3[nn][nn], s4[nn][nn], s5[nn][nn], s6[nn][nn],  s7[nn][nn], s8[nn][nn], s9[nn][nn], s10[nn][nn], p1[nn][nn], p2[nn][nn], p3[nn][nn], p4[nn][nn], p5[nn][nn], p6[nn][nn], p7[nn][nn];
+    int s1[nn][nn], s2[nn][nn], s3[nn][nn], s4[nn][nn], s5[nn][nn], s6[nn][nn],  s7[nn][nn], s8[nn][nn], s9[nn][nn], s10[nn][nn], p1[nn][nn], p2[nn][nn], 
+    p3[nn][nn], p4[nn][nn], p5[nn][nn], p6[nn][nn], p7[nn][nn];
     
     perform (nn, b12, b22, s1, 1);
     perform (nn, a11, a12, s2, 0);
@@ -130,3 +131,32 @@ Product of matrix A & B :
 0  0  
 0  0  
 Time taken : 0.000007 sec
+
+
+*********COMPLEXITY*******
+Strassen's algorithm for matrix multiplication is a divide-and-conquer algorithm that reduces the number of recursive multiplications required compared to the
+traditional matrix multiplication algorithm. The time complexity of Strassen's algorithm can be analyzed as follows:
+
+Let n be the size of the input square matrices (assuming they are n x n matrices).
+
+1.  Divide Step:
+Strassen's algorithm divides the input matrices into four equally-sized submatrices. This step takes constant time, i.e., O(1).
+
+2.  Recursive Calls:
+Strassen's algorithm recursively calls itself to multiply the submatrices. In each recursive call, it performs a total of 7 matrix multiplications and some 
+additional matrix additions and subtractions.
+(i) Number of recursive calls: Strassen's algorithm performs a total of log_2(n) recursive calls, as it divides the matrices into halves at each level of 
+recursion until reaching the base case of 1 x 1 matrices.
+(ii) Complexity of each recursive call: Each recursive call involves multiplying two submatrices of size n/2 x n/2. Therefore, the time complexity of each 
+recursive call can be expressed as T(n/2).
+
+Therefore, the overall time complexity of the recursive calls can be expressed by the recurrence relation:
+T(n) = 7T(n/2) + O(n^2)
+
+3.  Combining Step:
+The combining step involves combining the results of the recursive calls to form the final result matrix. This step takes linear time, O(n^2), as it involves 
+additions and subtractions of matrices of size n x n.
+
+By solving the recurrence relation, it can be deduced that the time complexity of Strassen's algorithm is:
+T(n) = O(n^log_2(7))
+Using the master theorem, we can determine that the time complexity of Strassen's algorithm is approximately O(n^2.81). 
