@@ -85,3 +85,41 @@ Weight     Amount used
 2     1.000000
 3     0.500000
 Time taken: 0.000004 seconds
+
+
+
+
+********ALGORITHM********
+FractionalKnapsack(items[], capacity)
+    1. Sort the items in non-increasing order of their value-to-weight ratio.
+    2. Create an empty knapsack.
+    3. Initialize the total value and remaining capacity of the knapsack to 0.
+    
+    4. For each item in the sorted list:
+        5. If the item's weight is less than or equal to the remaining capacity:
+            6. Add the whole item to the knapsack.
+            7. Update the total value and remaining capacity.
+        8. Otherwise:
+            9. Calculate the fraction of the item that can fit into the knapsack.
+            10. Add the fraction of the item to the knapsack.
+            11. Update the total value and remaining capacity.
+            12. Break out of the loop since the knapsack is full.
+    
+    13. Return the knapsack with the maximum value.
+
+
+
+*******COMPLEXITY*********
+The time complexity of the Fractional Knapsack algorithm depends on the sorting step and the subsequent iteration over the sorted items.
+Let's denote N as the number of items.
+
+1.  Sorting Step:
+The algorithm requires sorting the N items based on their value-to-weight ratios. The time complexity of the sorting step depends on the sorting algorithm used. 
+The most commonly used sorting algorithms, such as QuickSort or MergeSort, have an average time complexity of O(N log N) or worst-case time complexity of O(N^2). 
+Therefore, the time complexity of the sorting step is typically O(N log N).
+
+2.  Iteration Step:
+After sorting the items, the algorithm iterates over the sorted list of N items and performs constant-time operations for each item.
+
+Therefore, the time complexity of the iteration step is O(N).
+Overall, the time complexity of the Fractional Knapsack algorithm is dominated by the sorting step, resulting in a time complexity of O(N log N)
