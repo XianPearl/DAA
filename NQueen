@@ -51,3 +51,36 @@ Sol no 1:
 2  4  1  3  
 Sol no 2:
 3  1  4  2  
+
+
+
+*******ALGORITHM*********
+Place (k, i)  
+   {  
+     For j  ←  1 to k - 1  
+      do if (x [j] = i)  
+       or (Abs x [j]) - i) = (Abs (j - k))  
+    then return false;  
+     return true;  
+}  
+
+
+N - Queens (k, n)  
+{  
+   For i  ←  1 to n  
+        do if Place (k, i) then  
+   {  
+      x [k]  ←  i;  
+      if (k ==n) then  
+        write (x [1....n));  
+      else  
+      N - Queens (k + 1, n);  
+   }  
+}  
+
+
+
+*******COMPLEXITY********
+The time complexity of the backtracking approach for the N-Queens problem is exponential, typically represented as O(N!). This is because at each step, 
+we have N choices for placing a queen in the first column, N-2 choices for placing a queen in the second column (to avoid immediate conflicts), N-4 choices 
+for placing a queen in the third column, and so on. Thus, the total number of possibilities to explore becomes N * (N-2) * (N-4) * ... * 1, which simplifies to N!.
