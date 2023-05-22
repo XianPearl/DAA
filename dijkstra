@@ -82,3 +82,50 @@ Distance from source to 3: 2
 Distance from source to 4: 4
 Distance from source to 5: 4
 Distance from source to 6: 3
+
+
+
+
+******ALGORITHM*********
+function dijkstra(G, S)
+    for each vertex V in G
+        distance[V] <- infinite
+        previous[V] <- NULL
+        If V != S, add V to Priority Queue Q
+    distance[S] <- 0
+	
+    while Q IS NOT EMPTY
+        U <- Extract MIN from Q
+        for each unvisited neighbour V of U
+            tempDistance <- distance[U] + edge_weight(U, V)
+            if tempDistance < distance[V]
+                distance[V] <- tempDistance
+                previous[V] <- U
+    return distance[], previous[]
+    
+    
+    
+
+
+********COMPLEXITY**********
+The time complexity of Dijkstra's algorithm for finding the shortest path in a weighted graph depends on the specific implementation and data structures used.
+
+Let's denote V as the number of vertices and E as the number of edges in the graph.
+
+1.  Initialization:
+The initialization step of Dijkstra's algorithm involves setting the initial distances from the source vertex to all other vertices as infinity, except for the 
+source vertex itself, which is set to 0. This initialization step takes O(V) time.
+
+2.  Priority Queue Operations:
+Dijkstra's algorithm uses a priority queue (typically implemented as a min-heap) to efficiently select the next vertex with the minimum distance from the source. 
+In each iteration, the algorithm extracts the vertex with the minimum distance from the priority queue and relaxes all its neighboring vertices.
+The total number of priority queue operations performed by Dijkstra's algorithm depends on the number of vertices and edges in the graph. In the worst case, each 
+vertex can be inserted and extracted from the priority queue once, and each edge can be relaxed once. Therefore, the total number of priority queue operations is 
+proportional to the number of vertices and edges, i.e., O(V + E).
+
+3.  Relaxation Operations:
+For each vertex, Dijkstra's algorithm relaxes its neighboring vertices by updating their distances if a shorter path is found through the current vertex. 
+The relaxation step typically takes constant time for each edge relaxation.
+
+Overall, the time complexity of Dijkstra's algorithm depends on the priority queue operations, which dominate the time complexity. Therefore, the time complexity 
+of Dijkstra's algorithm can be approximated as O(V + E).
