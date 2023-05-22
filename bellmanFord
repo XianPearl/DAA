@@ -88,3 +88,46 @@ Vertex   Distance from Source
 2 		 2
 3 		 -2
 4 		 1
+
+
+
+******ALGORITHM******
+function bellmanFord(G, S)  
+  for each vertex V in G  
+    distance[V] <- infinite  
+      previous[V] <- NULL  
+  distance[S] <- 0  
+  
+  for each vertex V in G                  
+    for each edge (U,V) in G  
+      tempDistance <- distance[U] + edge_weight(U, V)  
+      if tempDistance < distance[V]  
+        distance[V] <- tempDistance  
+        previous[V] <- U  
+  
+  for each edge (U,V) in G  
+    If distance[U] + edge_weight(U, V) < distance[V}  
+      Error: Negative Cycle Exists  
+  
+  return distance[], previous[]  
+  
+  
+  
+
+*****COMPLEXITY*********
+The time complexity of the Bellman-Ford algorithm depends on the number of vertices and edges in the graph.
+Let's denote V as the number of vertices and E as the number of edges in the graph.
+The basic Bellman-Ford algorithm consists of two main steps: relaxation and edge relaxation. The relaxation step iterates through all the edges in the graph V-1 
+times and updates the distances of the vertices based on the current path. The edge relaxation step is an additional pass that checks for negative cycles. 
+Hence, the total number of iterations performed is V-1.
+In each iteration, the algorithm checks all the edges, and for each edge, it performs a relaxation operation if necessary. Therefore, the time complexity of each
+iteration is O(E).
+Therefore, the overall time complexity of the Bellman-Ford algorithm is O(V * E) since we have V-1 iterations, and each iteration takes O(E) time.
+In the worst-case scenario, where the graph is dense and contains a large number of edges, the time complexity can be approximated as O(V^3) because E can be at
+most O(V^2) for a dense graph.
+It's important to note that the Bellman-Ford algorithm can be optimized to achieve better performance in practice. One common optimization is to use a priority 
+queue (e.g., using a min-heap) to select the edges for relaxation instead of scanning all edges in each iteration. This optimization reduces the time complexity 
+for each iteration to O(E log V), resulting in an overall time complexity of O(V * E log V). However, the worst-case time complexity remains O(V^3) due to the V-1 
+iterations.
+
+In summary, the time complexity of the Bellman-Ford algorithm is O(V * E) or O(V^3), depending on the graph's density and the optimization techniques used.
