@@ -40,4 +40,30 @@ int main() {
 
 
 
-*********OUTPUT*********
+*********ALGORITHM*********
+n = no of vertices
+A = matrix of dimension n*n
+for k = 1 to n
+    for i = 1 to n
+        for j = 1 to n
+            Ak[i, j] = min (Ak-1[i, j], Ak-1[i, k] + Ak-1[k, j])
+return A
+
+
+
+
+
+*******COMPLEXITY*****
+The time complexity of the Floyd-Warshall algorithm can be analyzed as follows:
+
+1.  Initialization step:
+Initializing the distance matrix takes O(V^2) time since it involves iterating over all pairs of vertices.
+
+2.  Iterations:
+The algorithm performs V iterations, each considering a different vertex as an intermediate vertex. In each iteration, it checks and updates the shortest path 
+distances between all pairs of vertices.
+
+(i) For each vertex k, the algorithm updates all the distances in the distance matrix, which takes O(V^2) time.
+(ii) Since the algorithm performs V iterations, the total time complexity for the iterations is O(V^3).
+Overall, the time complexity of the Floyd-Warshall algorithm is O(V^3). It scales cubically with the number of vertices. It is important to note that the time 
+complexity is independent of the number of edges in the graph.
