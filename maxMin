@@ -64,9 +64,6 @@ void main () {
 
 
 
-
-
-
 ******OUTPUT********
 Array size : 10
 598  972  775  313  730  925  969  173  330  412  
@@ -74,3 +71,35 @@ Max : 972
 Min : 173
 0.000002 sec
 
+
+*******ALGORITHM*****
+Max:  a [i]
+Min:   a [i]
+For i= 2 to n do
+If a[i]> max then
+max = a[i]
+if a[i] < min then
+min: a[i]
+return (max, min)
+
+
+******COMPLEXITY******
+The time complexity of this algorithm can be analyzed as follows:
+
+1.  Divide Step:
+At each step, the array is divided into two subarrays. This step takes constant time, i.e., O(1).
+
+2.  Conquer Step:
+The conquer step involves solving the subproblems independently by recursively calling MaxMin on the subarrays.
+(i) Since the array is divided into two halves at each step, the total number of recursive calls is O(log n).
+(ii) Each recursive call processes a subarray of size n/2, resulting in a total time complexity of O(n).
+
+3.  Combine Step:
+The combine step involves comparing the maximum and minimum values obtained from the subarrays. This step takes constant time, i.e., O(1).
+
+Therefore, the overall time complexity of the Max-Min algorithm using the divide and conquer approach is given by:
+T(n) = 2T(n/2) + O(1)
+By using the Master Theorem for divide and conquer algorithms, we can deduce that the time complexity is O(n).
+
+In summary, the time complexity of the Max-Min problem using the divide and conquer approach is O(n) in the best and worst case scenarios, where n is the number of
+elements in the input array.
