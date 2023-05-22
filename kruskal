@@ -75,3 +75,32 @@ The edges of minimum spanning tree are
 6 edge (5, 7), cost = 10
 
 Minimum Cost = 26 units
+
+
+
+**********ALGORITHM*******
+Step 1: Create a forest F in such a way that every vertex of the graph is a separate tree.  
+Step 2: Create a set E that contains all the edges of the graph.  
+Step 3: Repeat Steps 4 and 5 while E is NOT EMPTY and F is not spanning  
+Step 4: Remove an edge from E with minimum weight  
+Step 5: IF the edge obtained in Step 4 connects two different trees, then add it to the forest F   
+(for combining two trees into one tree).  
+ELSE  
+Discard the edge  
+Step 6: END  
+
+
+
+*******COMPLEXITY******
+The time complexity of Kruskal's algorithm can be analyzed as follows:
+
+1.  Sorting the edges: The first step of Kruskal's algorithm involves sorting the edges of the graph. The most commonly used sorting algorithm is quicksort, which 
+has an average case time complexity of O(n log n), where n is the number of edges in the graph.
+
+2. Union-find operations: Kruskal's algorithm also requires performing union-find operations on the edges to determine if adding an edge to the MST will create a 
+cycle. A common implementation of the union-find data structure using union by rank and path compression has a time complexity of O(log n) per operation, where n 
+is the number of nodes in the graph. Since Kruskal's algorithm performs at most 2n-1 union-find operations (one for each edge), the total time complexity for 
+union-find operations is O(n log n).
+
+Therefore, the overall time complexity of Kruskal's algorithm is O(n log n), which is dominated by the time complexity of sorting the edges. This makes Kruskal's 
+algorithm one of the most efficient algorithms for finding the MST of a graph, and it is widely used in practice.
